@@ -105,7 +105,7 @@ Backend deployed on **Render**.
 
 # GitHub Repository-
 
-https://github.com/your-username/your-repository
+https://github.com/sshreya2311/email-writer-sbbackend.git
 
 # Backend URL-
 
