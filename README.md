@@ -1,45 +1,98 @@
-# AI Email Writer Assistant-
+#  AI Email Writer
 
-An AI-powered Chrome Extension that generates professional email replies directly inside Gmail using the Google Gemini API.
+An AI-powered **Chrome Extension** that generates professional email replies directly inside **Gmail** using the **Google Gemini API**.
 
-# Features-
+The application combines a Chrome Extension frontend with a **Java Spring Boot REST API backend**, enabling users to generate context-aware email responses quickly and efficiently.
 
--  Generate AI-powered email replies
--  Works directly inside Gmail
--  Professional tone generation
--  Spring Boot REST API backend
--  Dockerized backend
--  Deployed on Render
--  Google Gemini API integration
+##  Features
 
-# Tech Stack-
+*  Generate AI-powered email replies
+*  Works directly inside Gmail
+*  Generate professional and context-aware responses
+*  Spring Boot REST API backend
+*  Google Gemini API integration
+*  Dockerized backend
+*  Backend deployed on Render
 
-# Frontend-
-- Chrome Extension (Manifest V3)
-- JavaScript
-- HTML
-- CSS
+##  Tech Stack
 
-# Backend-
-- Java
-- Spring Boot
-- Spring Web
-- Spring WebFlux
-- WebClient
+### Frontend
 
-# AI-
-- Google Gemini API
+* Chrome Extension — Manifest V3
+* JavaScript
+* HTML
+* CSS
 
-# Deployment-
-- Docker
-- Render
+### Backend
 
-# Version Control-
-- Git
-- GitHub
-- 
-# Project Structure-
-Email-Writer-Assistant
+* Java
+* Spring Boot
+* Spring Web
+* Spring WebFlux
+* WebClient
+
+### AI
+
+* Google Gemini API
+
+### Deployment
+
+* Docker
+* Render
+
+### Version Control
+
+* Git
+* GitHub
+
+##  Architecture
+
+```text
+                 ┌─────────────────────┐
+                 │       Gmail         │
+                 │                     │
+                 │  Email Composition  │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │  Chrome Extension   │
+                 │                     │
+                 │ HTML / CSS / JS     │
+                 └──────────┬──────────┘
+                            │
+                     HTTP POST Request
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │   Spring Boot API   │
+                 │                     │
+                 │ Java + WebFlux      │
+                 │ WebClient           │
+                 └──────────┬──────────┘
+                            │
+                       API Request
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │   Google Gemini     │
+                 │         API         │
+                 └──────────┬──────────┘
+                            │
+                     Generated Reply
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │  Chrome Extension   │
+                 │                     │
+                 │ Generated Response  │
+                 └─────────────────────┘
+```
+
+##  Project Structure
+
+```text
+email-writer-assistant/
 │
 ├── frontend/
 │   ├── manifest.json
@@ -55,61 +108,122 @@ Email-Writer-Assistant
 │   └── application.properties
 │
 └── README.md
+```
 
-# API Endpoint-
+##  API
 
-# Generate Email Reply
+### Generate Email Reply
 
-*POST*
-/api/email/generate
+**Endpoint**
 
-# Sample Request
+```http
+POST /api/email/generate
+```
 
-json
+**Request**
+
+```json
 {
   "emailContent": "Thank you for your email.",
   "tone": "professional"
 }
+```
 
-# Installation-
+The backend processes the request, sends the relevant prompt to the Google Gemini API, and returns the generated email response.
 
-# Backend-
+##  Local Installation
 
-1. Clone the repository
-`bash
-git clone https://github.com/your-username/your-repository.git
+### Prerequisites
 
+* Java 17+
+* Maven
+* Google Chrome
+* Google Gemini API key
+* Git
 
-2. Configure environment variables
-GEMINI_URL
-GEMINI_KEY
+### 1. Clone the Repository
 
+```bash
+git clone https://github.com/sshreya2311/email-writer-sbbackend.git
+cd email-writer-sbbackend
+```
 
-3. Run
-bash
+### 2. Configure Environment Variables
+
+Configure the required Gemini API credentials:
+
+```text
+GEMINI_URL=your_gemini_api_url
+GEMINI_KEY=your_gemini_api_key
+```
+
+> Never commit API keys or other sensitive credentials to GitHub.
+
+### 3. Run the Backend
+
+Using Maven:
+
+```bash
 ./mvnw spring-boot:run
+```
 
-# Chrome Extension-
+On Windows:
 
-1. Open Chrome
-2. Go to `chrome://extensions`
-3. Enable **Developer Mode**
-4. Click **Load unpacked**
-5. Select the extension folder
+```bash
+mvnw.cmd spring-boot:run
+```
 
-# Deployment-
+The Spring Boot application will start on the configured port.
 
-Backend deployed on **Render**.
+##  Install the Chrome Extension
 
-# Demo-
+1. Open Google Chrome.
+2. Navigate to:
 
-# GitHub Repository-
+```text
+chrome://extensions
+```
 
-https://github.com/sshreya2311/email-writer-sbbackend.git
+3. Enable **Developer Mode**.
+4. Click **Load unpacked**.
+5. Select the `frontend` directory.
+6. Open Gmail and use the extension to generate email replies.
 
-# Backend URL-
+##  Deployment
+
+The Spring Boot backend is containerized using **Docker** and deployed on **Render**.
+
+### Backend
+
+**Live Backend:**
+https://email-writer-sbbackend.onrender.com
+
+The backend is a REST API, so opening the root URL directly in a browser may return a **404 response**. The primary functionality is available through:
+
+```http
+POST /api/email/generate
+```
+
+##  Project Links
+
+### GitHub Repository
+
+https://github.com/sshreya2311/email-writer-sbbackend
+
+### Live Backend
 
 https://email-writer-sbbackend.onrender.com
 
-> Note: The backend is a REST API. Opening the root URL in a browser may show a 404 because the primary endpoint is `POST /api/email/generate`.
+##  Future Enhancements
+
+* Support for multiple email tones such as friendly, formal, concise, and persuasive
+* Email summarization
+* Personalized AI-generated responses
+* Support for additional email platforms
+* User authentication
+* Custom user preferences
+* Improved prompt engineering
+* Production-ready monitoring and logging
+
+
 
